@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="86" started-at="2017-03-11T12:36:46Z" finished-at="2017-03-11T12:36:46Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="86" started-at="2017-03-11T12:36:46Z" finished-at="2017-03-11T12:36:46Z">
+      <class name="testng.NewTest">
+        <test-method status="PASS" signature="testCheckDate(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckDate" duration-ms="36" started-at="2017-03-11T14:36:46Z" data-provider="dates" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[DD/MM/YYYY]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckDate -->
+        <test-method status="PASS" signature="testCheckDate(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckDate" duration-ms="2" started-at="2017-03-11T14:36:46Z" data-provider="dates" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[55/55/2017]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckDate -->
+        <test-method status="PASS" signature="testCheckTournamentExist(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckTournamentExist" duration-ms="3" started-at="2017-03-11T14:36:46Z" data-provider="tournaments" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[tournament1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckTournamentExist -->
+        <test-method status="PASS" signature="testCheckTournamentExist(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckTournamentExist" duration-ms="3" started-at="2017-03-11T14:36:46Z" data-provider="tournaments" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[tournament2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckTournamentExist -->
+        <test-method status="PASS" signature="testCheckTournamentExist(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckTournamentExist" duration-ms="1" started-at="2017-03-11T14:36:46Z" data-provider="tournaments" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckTournamentExist -->
+        <test-method status="PASS" signature="testCheckTournamentExist(boolean, java.lang.String)[pri:0, instance:testng.NewTest@3c09711b]" name="testCheckTournamentExist" duration-ms="2" started-at="2017-03-11T14:36:46Z" data-provider="tournaments" finished-at="2017-03-11T14:36:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[tournament]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckTournamentExist -->
+      </class> <!-- testng.NewTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
