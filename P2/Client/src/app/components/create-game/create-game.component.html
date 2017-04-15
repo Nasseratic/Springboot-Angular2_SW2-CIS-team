@@ -1,0 +1,105 @@
+<md-card style="background-color: #fbfbfb !important; min-height: 34vw;" layout-align="center center">
+
+
+
+  <md-card class="example-form " layout-align="center center" style="margin: 3%; margin-top:0%; margin-bottom:0%; padding:2%;">
+    <h2 style="text-align: center; color:#ff1744; padding-top:1%;"> New Course </h2>
+  </md-card>
+
+  <md-card class="example-form " layout-align="center center" style="margin: 3%; margin-bottom:0%; margin-top:0%; padding :2%;">
+    <form>
+
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Game Name" [(ngModel)]="name" name="Game Name" >
+            </md-input-container>
+          </td>
+        </tr>
+      </table>
+
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="example-full-width">
+              <textarea mdInput placeholder="description" type="text" [(ngModel)]="description" name="description" >  </textarea>
+            </md-input-container>
+          </td>
+        </tr>
+      </table>
+
+
+
+
+    </form>
+
+  </md-card>
+
+
+  <md-card class="example-form " *ngFor="let q of qs ; let i = index" layout-align="center center" style="margin: 3%; margin-top:0%; margin-bottom:0%; padding:2%;">
+    <i class="material-icons" (click)="delete(i)" style="float: right; color:gray; margin-top:-10px;">clear</i>
+
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Q{{i+1}}" #qi ([value])="q.q" (keyup)="updateQ(qi.value,i);" >
+    </md-input-container>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Add Answer" #a (keyup.enter)="update(a.value,i); a.value=''" (blur)="update(a.value,i);  a.value='' ">
+          </md-input-container>
+
+        </td>
+        <td>
+           <md-icon style="margin-bottom:-5px; color:cornflowerblue;">add_circle</md-icon>
+          
+        </td>
+      </tr>
+    </table>         
+
+    <md-radio-group [(ngModel)]="answers[i]">
+      <span style="color:gray;">Right Answer :</span>
+      <md-radio-button class="example-radio-button" *ngFor="let a of q.a ; let j=index" [value]="a">
+        {{a}} <md-icon style="font-size:small; margin-bottom:-4px;" (click)="deleteA(i,j)">clear</md-icon>
+      </md-radio-button>
+    </md-radio-group>
+  </md-card>
+
+<md-card style="margin: 3%; margin-bottom:0%; margin-top:0%; padding :2%;">
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+           <button md-button style="background-color:cornflowerblue; color:#fbfbfb; float: right; min-width:10%" (click)="addQ()">Add question  <md-icon>queue</md-icon></button>
+        </td>
+      </tr>
+    </table>
+  </md-card>
+
+
+  <md-card class="example-form " layout-align="center center" style="margin: 3%; margin-top:0%; padding:2%;">
+
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-radio-group class="example-radio-group" [(ngModel)]="selectedtype">
+            <md-radio-button class="example-radio-button" *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </md-radio-button>
+          </md-radio-group>
+        </td>
+        <td>
+          <button md-button style="background: #ff1744; color:#fbfbfb; float: right; min-width:50%" (click)="createGame()" > Create Game &nbsp; &nbsp;  <md-icon>thumb_up</md-icon> </button>
+        </td>
+      </tr>
+    </table>
+  </md-card>
+
+
+</md-card>

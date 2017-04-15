@@ -1,0 +1,56 @@
+<md-card class="mdl-grid" style="background-color: #fbfbfb !important; min-height: 34vw;">
+
+
+  <md-card-title-group>
+    <md-card-title>{{ view_name }}</md-card-title>
+    <!--<md-card-subtitle>Subtitle Card with title</md-card-subtitle>-->
+  </md-card-title-group>
+
+
+  <div class="mdl-grid">
+
+
+    <div *ngFor=" let game of games  "  class="mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet" >
+
+
+      <md-card>
+
+
+        <md-card-header>
+          <div md-card-avatar class="example-header-image"></div>
+          <md-card-title>{{game.name}}</md-card-title>
+          <md-card-subtitle>{{game.category}}</md-card-subtitle>
+        </md-card-header>
+
+        <div class="mdl-card__menu" style="color: #ec4f42">
+          <i class="material-icons">{{game.icon}}</i> <span>{{game.type}}</span>
+        </div>
+
+
+        <img md-card-image style="opacity: 0.8" src="{{game.img}}">
+        <md-card-content>
+          <p>
+            {{game.description}}
+          </p>
+        </md-card-content>
+
+
+        <md-card-actions>
+
+          <button  md-button style="color: #FF5722" (click)="viewGame(game.id);">
+            <md-icon>play_arrow</md-icon>
+            <span>Play &nbsp;</span>
+          </button>
+
+        </md-card-actions>
+
+      </md-card>
+
+
+    </div>
+
+  </div>
+
+
+</md-card>
+
