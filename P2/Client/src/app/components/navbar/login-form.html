@@ -2,18 +2,18 @@
 
   <table class="example-full-width" cellspacing="0"><tr>
     <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="Your Email" type="email">
+      <input mdInput placeholder="Your Email" type="email" name="email"  [(ngModel)]="email">
     </md-input-container></td>
   </tr></table>
 
   <table class="example-full-width" cellspacing="0"><tr>
     <td><md-input-container class="example-full-width">
-      <input mdInput placeholder="Your Password" type="password">
+      <input mdInput placeholder="Your Password" type="password" name="pw" [(ngModel)]="pw" >
     </md-input-container></td>
   </tr></table>
 
 
-  <button md-button class="example-full-width"  style="background-color: #ff1744; color: #fff;">
+  <button md-button class="example-full-width" (click)="login()" style="background-color: #ff1744; color: #fff;">
         LOGIN
   </button>
 

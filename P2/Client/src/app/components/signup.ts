@@ -55,18 +55,18 @@ export class SignUp implements OnInit {
 
 
   submit() {
-    this.auth.signUp(this.user).subscribe(
-      () => {console.log("done!");
-      this.auth.setUser(this.user.name);
-      console.log(this.user.name);
-            
-      this.router.navigate(['/home']);
-
-    }
-            
-    );
-
     
-
+    this.auth.signUp(this.user).subscribe(
+      (res) => {
+      console.log("done!");
+      this.auth.setUser(this.user.name , this.user.type , res['_body'] );
+      console.log(this.user.name);
+      this.router.navigate(['/home']);
+      
+    },
+    (err) =>
+    alert("error !!")
+    );
   }
+
 }

@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    this.auth.setUser("");
+    this.auth.setUser("","","");
     this.router.navigate(["/"]);
   }
 
@@ -38,8 +38,7 @@ export class NavbarComponent implements OnInit {
       if(localStorage.getItem("currentUser") !== null ){
       this.userName=localStorage.getItem("currentUser");
       }
-      console.log(this.userName);
-              
+      console.log(this.userName);              
       }
     );
 
@@ -80,7 +79,9 @@ export class NavbarComponent implements OnInit {
 
 export class DialogResultExampleDialog1 {
 
-  constructor(public dialog: MdDialog,public dialogRef: MdDialogRef<DialogResultExampleDialog1> , private router:AppRoutingModule ) {
+  email:string;
+  pw:string;
+  constructor(public dialog: MdDialog,public dialogRef: MdDialogRef<DialogResultExampleDialog1> , private routerM:AppRoutingModule , private auth:AuthService,private router: Router) {
   
 
    }
@@ -89,6 +90,22 @@ export class DialogResultExampleDialog1 {
 
     close() {
     this.dialog.closeAll();
+      }
+
+      login(){
+        this.auth.login({"email":this.email,"pw":this.pw}).subscribe(
+          (res) =>{
+                console.log("done!");
+                this.auth.setUser(res['_body'].name , res['_body'].type , res['_body'].id );
+                console.log(res['_body'].name);
+                this.router.navigate(['/home']);
+          },
+          (err) => {
+              alert("ERROR! TRY AGAIN !")
+              console.log(err); 
+          }
+
+        );
       }
     
 }

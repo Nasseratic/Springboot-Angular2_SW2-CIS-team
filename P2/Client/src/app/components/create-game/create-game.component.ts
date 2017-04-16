@@ -53,15 +53,9 @@ export class CreateGameComponent implements OnInit {
 
   createGame() {
     let game = { 'id': '', 'name': this.name, 'teacher': localStorage.getItem("currentUser"), 'category': this.selectedtype, 'qs': this.qs };
-    this.gameService.createGame(game).subscribe(
-      (res) => {
-        console.log("done!");
-        console.log(game.name);
-        console.log(res['_body']);
-
-        //  this.gameService.navigate(['/home']);
-      });
+    this.gameService.createGame(game,this.answers);
    }
+   
   delete(i: number) {
     if (i === 0) this.qs.splice(i, i + 1);
     else

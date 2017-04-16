@@ -1,7 +1,7 @@
 import { Component, OnInit , Input } from '@angular/core';
 import {Http} from "@angular/http";
 import {ActivatedRoute} from '@angular/router'
-import {QServiceService} from '../../services/q-service.service'
+import {GameServiceService} from '../../services/game-service.service'
 @Component({
   selector: 'app-q-card',
   templateUrl: './q-card.component.html',
@@ -27,15 +27,16 @@ import {QServiceService} from '../../services/q-service.service'
 }
 
 `] ,
-providers : [QServiceService]
+providers : [GameServiceService]
 
 })
 export class QCardComponent implements OnInit {
-  gamme_name : string;
+  game_name : string;
   qs=[];
   selected=[];
+  answers=[];
   id ;
-  constructor(private http:Http, private router:ActivatedRoute, private qServiceService:QServiceService ) {
+  constructor(private http:Http, private router:ActivatedRoute, private gameServiceService:GameServiceService ) {
 
     
   }
@@ -44,21 +45,16 @@ export class QCardComponent implements OnInit {
     let id = this.router.snapshot.params['id'];
     this.id = id;
 
-   this.qServiceService.getQs(id).subscribe(qs => this.qs = qs);
-    /*
-    let id = this.router.snapshot.params['id'];
-    this.id = id;
-    this.http.get('/src/'+id+'.json')
-      .map(response => response.json())
-      .subscribe( (res) => this.qs = (res)  );
-    */
+          this.gameServiceService.getQs(id).subscribe(qs => {this.qs = qs.qs
+            this.game_name = qs.name;
+            console.log(this.qs);
+            
+        });
 
-      }
+    }
 
 
     log(){
        console.log(this.selected);
-          
-       
      }
 }

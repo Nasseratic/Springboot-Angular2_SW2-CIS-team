@@ -34,6 +34,7 @@ export class GameCardComponent implements OnInit {
     else{
 
     this.gameServiceService.getGames().subscribe(games => this.games = games);
+        console.log(this.games);
         
     }
   }
