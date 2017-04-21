@@ -1,7 +1,7 @@
-import { Component, OnInit  } from '@angular/core';
-import {MdDialog, MdDialogRef} from "@angular/material";
+import { Component, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef } from "@angular/material";
 import { AppShellModule } from '@angular/app-shell';
-import {ActivatedRoute} from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { AppRoutingModule } from '../../routers.module';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router'
@@ -11,38 +11,35 @@ import { Router } from '@angular/router'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   providers: [AppShellModule],
-  
+
 })
 
 
 export class NavbarComponent implements OnInit {
-  
-  userName ="";
 
-  constructor(public dialog: MdDialog , private route:ActivatedRoute , private router: Router , private auth:AuthService) {}
+  userName = "";
+
+  constructor(public dialog: MdDialog, private route: ActivatedRoute, private router: Router, public auth: AuthService) { }
 
   openLoginDialog() {
-    this.dialog.open(DialogResultExampleDialog1);
-
+    this.dialog.open(DialogResultExampleDialog2);
   }
 
-  logout(){
-    this.auth.setUser("","","");
+  logout() {
+    this.auth.setUser("", "", "");
     this.router.navigate(["/"]);
   }
 
   ngOnInit() {
     this.router.events.subscribe(
       () => {
-      //this.userName=this.auth.getUser();
-      if(localStorage.getItem("currentUser") !== null ){
-      this.userName=localStorage.getItem("currentUser");
-      }
-      console.log(this.userName);              
+        //this.userName=this.auth.getUser();
+        if (this.auth.getUser() !== null) {
+          this.userName = this.auth.getUser();
+        }
+        console.log(this.userName);
       }
     );
-
-    
     /*this.route
       .queryParams
       .subscribe(params => {
@@ -57,7 +54,18 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  
+
+  routToAchievements() {
+      this.router.navigate(['/Achievements'] , { queryParams: {} } );
+  }
+
+
+  routToMycourses() {
+      this.router.navigate(['/courses'] , { queryParams: {} } );
+  }
+
+
+
 
 }
 
@@ -66,7 +74,7 @@ export class NavbarComponent implements OnInit {
 @Component({
   selector: 'dialog-result-example-dialog1',
   templateUrl: 'login-form.html',
-  styles:[ `
+  styles: [`
 
 .example-full-width {
   width: 100%;
@@ -77,37 +85,39 @@ export class NavbarComponent implements OnInit {
 `]
 })
 
-export class DialogResultExampleDialog1 {
+export class DialogResultExampleDialog2 {
 
-  email:string;
-  pw:string;
-  constructor(public dialog: MdDialog,public dialogRef: MdDialogRef<DialogResultExampleDialog1> , private routerM:AppRoutingModule , private auth:AuthService,private router: Router) {
-  
-
-   }
+  email: string;
+  pw: string;
+  constructor(public dialog: MdDialog, public dialogRef: MdDialogRef<DialogResultExampleDialog2>, private routerM: AppRoutingModule, private auth: AuthService, private router: Router) {
 
 
+  }
 
-    close() {
+
+
+  close() {
     this.dialog.closeAll();
+  }
+
+  login() {
+    this.auth.login({ "email": this.email, "pw": this.pw }).subscribe(
+      (res) => {
+        console.log("done!");
+
+        this.auth.setUser(res.name, res.type, res.id);
+        console.log(res.name);
+        this.close();
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        alert("ERROR! TRY AGAIN !")
+        console.log(err);
       }
 
-      login(){
-        this.auth.login({"email":this.email,"pw":this.pw}).subscribe(
-          (res) =>{
-                console.log("done!");
-                this.auth.setUser(res['_body'].name , res['_body'].type , res['_body'].id );
-                console.log(res['_body'].name);
-                this.router.navigate(['/home']);
-          },
-          (err) => {
-              alert("ERROR! TRY AGAIN !")
-              console.log(err); 
-          }
+    );
+  }
 
-        );
-      }
-    
 }
 
 

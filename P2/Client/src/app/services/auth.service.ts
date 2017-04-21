@@ -12,6 +12,7 @@ import {Headers} from '@angular/http';
 @Injectable()
 export class AuthService {
 
+
   private userName = "";
 
   headers = new Headers({
@@ -23,7 +24,7 @@ export class AuthService {
 //: Rx.Observable<Response>
   signUp( user ): Rx.Observable<any>{
     
-    let body = JSON.stringify({ "name":user.name , "pw":user.pw , "id":user.id , "email":user.email});
+    let body = JSON.stringify({ "name":user.name , "pw":user.pw , "id":user.id , "email":user.email, "type":user.type});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
     return this.http.post('http://localhost:8080/api/create/user/', body , options );
@@ -38,14 +39,24 @@ export class AuthService {
   }
   
   getUser(){
-    return this.userName;
+    return localStorage.getItem('currentUser');
+  }
+  
+  getType(){
+    return localStorage.getItem('type');
   }
 
-  login(loginDeta):Rx.Observable<any>{
+  login(loginDeta):Rx.Observable<any>{  
+    console.log({ "email":loginDeta.email , "pw":loginDeta.pw });
     let body = JSON.stringify({ "email":loginDeta.email , "pw":loginDeta.pw });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
-    return this.http.post('http://localhost:8080/api/login/', body , options );
+    return this.http.post('http://localhost:8080/api/login/', body , options ).map(this.extractData).publish().refCount();
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body || {};
   }
 
 }

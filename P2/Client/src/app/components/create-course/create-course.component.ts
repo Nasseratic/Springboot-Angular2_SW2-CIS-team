@@ -28,6 +28,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCourseComponent implements OnInit {
 
+  selectedtype: any;
   categories = ["Math","Science","Programming"];
   constructor() { }
 

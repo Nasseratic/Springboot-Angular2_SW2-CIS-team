@@ -2,12 +2,12 @@
 
 
   <md-card>
+     
     <md-card-title>{{game_name}}</md-card-title>
     <!--<md-card-subtitle>Subtitle Card with title</md-card-subtitle>-->
   </md-card>
 
-
-  <md-card *ngFor=" let q of qs ; let idx=index " >
+  <md-card *ngFor=" let q of qs ; let idx=index ">
     <md-card-header>
       <div md-card-avatar class="example-header-image"></div>
       <md-card-subtitle>{{q.q}}</md-card-subtitle>
@@ -28,14 +28,22 @@
 
 
   <md-card>
-      <button (click)="log()"md-button style="background-color: #FF5722 ; color:#fff;" >
+
+<button (click)="back()" md-button style="background-color: #000 ; color:#fff;">
+
+            <span>Back</span>
+            <md-icon>arrow_back</md-icon>
+
+          </button>
+    <button (click)="correctingDialog()" md-button style="background-color: #FF5722 ; color:#fff;">
 
             <span>Submit &nbsp;</span>
             <md-icon>done</md-icon>
 
           </button>
 
-    
+
+
   </md-card>
 
 </md-card>

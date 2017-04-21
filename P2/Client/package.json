@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,11 +12,11 @@
     "e2e": "ng e2e",
     "sw": "sw-precache --root=dist --config=sw-precache-config.js",
     "static-serve": "live-server   --host=localhost  --port=4200 --open=dist  --entry-file=index.html"
-
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.1",
+    "@angular/app-shell": "^0.1.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",

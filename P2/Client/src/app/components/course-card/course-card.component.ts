@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseServiceService } from './../../services/course-service.service';
 import { Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'course-cards',
@@ -11,15 +12,27 @@ import { Router } from '@angular/router'
 export class CourseCardComponent implements OnInit {
 
   courses = [];
-  view_name = "Courses"
-  constructor(private service:CourseServiceService , private router : Router ) {
+  view_name = "ALL COURSES";
+  id : any;
+
+  constructor(private service:CourseServiceService , private router: Router, private aRouter: ActivatedRoute) {
 
 
   }
 
   ngOnInit() {
 
-      this.service.getCourses().subscribe(courses => this.courses = courses);
+
+    let id = this.aRouter.snapshot.params['id'];
+    this.id = id;
+
+    if (id) {
+      console.log("hey");
+
+    }
+    else {
+      this.service.getCourses().subscribe(courses => this.courses = courses);      
+    }
 
   }
 

@@ -5,8 +5,8 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   //changeDetection: ChangeDetectionStrategy.OnPush
-
 })
+
 export class AppComponent implements OnInit{
 
 
@@ -18,5 +18,5 @@ export class AppComponent implements OnInit{
   }
 
 
-
+  
 }

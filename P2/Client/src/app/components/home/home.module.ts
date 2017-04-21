@@ -8,6 +8,7 @@ import 'hammerjs';
 import { CourseCardComponent } from '../course-card/course-card.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { HomeComponent } from './home.component';
+
 /*
 import { GameViewComponent } from './components/game-view/game-view.component';
 import { HomeComponent } from './components/home/home.component'

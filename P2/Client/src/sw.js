@@ -5,7 +5,6 @@ let version = '1';
 let cacheName = 'pwa-client-v' + version;
 let dataCacheName = 'pwa-client-data-v' + version;
 let appShellFilesToCache = [
-  './',
   './index.html',
   './inline.bundle.js',
   './styles.bundle.js',
@@ -59,3 +58,12 @@ return r2.clone();
 })
 );
 });
+
+/*
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
+});*/

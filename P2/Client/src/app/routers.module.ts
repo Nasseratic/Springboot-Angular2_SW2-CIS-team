@@ -8,14 +8,14 @@ import { CreateGameComponent }   from './components/create-game/create-game.comp
 
 import {SignUp} from './components/signup';
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home',  component: HomeComponent },
+  //{ path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '',  component: HomeComponent },
   { path: 'game/:id', component: QCardComponent },
   { path: 'course/:id', component: GameCardComponent },  
   { path: 'create/course', component: CreateCourseComponent },    
   { path: 'create/game', component: CreateGameComponent },      
   { path: 'signup', component: SignUp },  
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

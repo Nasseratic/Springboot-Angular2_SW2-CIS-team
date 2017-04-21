@@ -1,0 +1,55 @@
+<table class="mdl-data-table  example-full-width" [style.height.px]="height">
+    <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Answer </th>
+            <th class="mdl-data-table__cell--non-numeric"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of corrected" [@flyInOut] (@flyInOut.done)="doNext()">
+            <td class="mdl-data-table__cell--non-numeric"> {{c.selected}} </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <md-icon class="mdl-data-table__cell--non-numeric" style="float: right; color:red;" *ngIf="!c.is">clear</md-icon>
+                <md-icon class="mdl-data-table__cell--non-numeric" style="float: right; color:green;" *ngIf="c.is">done</md-icon>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+<table class="example-full-width">
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            <h4 *ngIf="result" style="color:crimson; text-align: center;" [@fly]> {{result}} / {{this.answers.length}} </h4>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span> 
+                 <md-icon  style="color:#FF5722;" *ngIf="result/this.answers.length > 0.3" [@fly]>star_rate</md-icon> 
+                 <md-icon  style="color:#FF5722;" *ngIf="result/this.answers.length > 0.6" [@fly]>star_rate</md-icon>
+                 <md-icon  style="color:#FF5722;" *ngIf="result/this.answers.length > 0.9" [@fly]>star_rate</md-icon>
+             </span>
+        </td>
+    </tr>
+
+
+</table>
+
+<br>
+
+<button md-button style="background-color: #000 ; color:#fff; " (click)="decision='back'; this.close();">
+        <span>Back</span>
+            <md-icon>arrow_back</md-icon>
+
+</button>
+
+
+<button md-button style="background-color: #ec4f42 ; color:#fff; " (click)="decision='replay'; this.close();">
+
+            <span>Again</span>
+            <md-icon>replay</md-icon>
+</button>

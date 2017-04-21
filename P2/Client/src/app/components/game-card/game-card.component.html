@@ -9,6 +9,9 @@
 
   <div class="mdl-grid">
 
+     <md-card *ngIf="games.length === 0"  style="text-align: center;">
+    <h4 >  <i class="material-icons" style="font-size: 2em; ">do_not_disturb_alt</i> <br> OPPS!  <br> <br> No games To Display , There might be an Error .. please check your network </h4>         
+     </md-card>
 
     <div *ngFor=" let game of games  "  class="mdl-cell mdl-cell--3-col mdl-cell--4-col-phone mdl-cell--4-col-tablet" >
 

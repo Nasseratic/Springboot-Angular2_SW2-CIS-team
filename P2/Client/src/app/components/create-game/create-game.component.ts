@@ -29,7 +29,7 @@ import { GameServiceService } from "../../services/game-service.service"
 providers:[GameServiceService]
 })
 export class CreateGameComponent implements OnInit {
-  categories = ["Math", "Science", "Programming"];
+  categories = ["Math", "Science", "Programming" , "Languages"];
   qs = [{ "q": "", "a": [] }];
   answers = [];
   name: string;
@@ -52,7 +52,7 @@ export class CreateGameComponent implements OnInit {
   }
 
   createGame() {
-    let game = { 'id': '', 'name': this.name, 'teacher': localStorage.getItem("currentUser"), 'category': this.selectedtype, 'qs': this.qs };
+    let game = { 'id': '', 'name': this.name, 'teacher': localStorage.getItem("id"), 'category': this.selectedtype, 'qs': this.qs };
     this.gameService.createGame(game,this.answers);
    }
    

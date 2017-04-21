@@ -43,7 +43,7 @@ export class SignUp implements OnInit {
     'name': '',
     'email': '',
     'pw': '',
-    'type':'student'
+    'type':''
   };
 
   constructor(private auth: AuthService, private router: Router) {
@@ -61,7 +61,7 @@ export class SignUp implements OnInit {
       console.log("done!");
       this.auth.setUser(this.user.name , this.user.type , res['_body'] );
       console.log(this.user.name);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
       
     },
     (err) =>
