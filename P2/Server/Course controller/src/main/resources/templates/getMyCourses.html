@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title> All courses</title>
+</head>
+<body>
+	<form action = "/result4">
+	Enter teacher Id
+		<input type  = "text" name = "teacherid" />
+		<input type  = "submit" value = "Submit" />
+	</form>
+	
+	<p th:if="${result4}"
+	
+	th:inline="text"
+	> [[${result4}]]  </p>
+</body>
+</html>	

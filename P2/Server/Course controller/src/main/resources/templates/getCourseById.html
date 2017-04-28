@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title> All courses</title>
+</head>
+<body>
+	<form action = "/result3">
+	Enter course Id
+		<input type  = "text" name = "id" />
+		<input type  = "submit" value = "Submit" />
+	</form>
+	
+	<p th:if="${result3}"
+	
+	th:inline="text"
+	> [[${result3}]]  </p>
+</body>
+</html>	
