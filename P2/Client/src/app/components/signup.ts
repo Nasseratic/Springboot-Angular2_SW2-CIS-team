@@ -46,6 +46,7 @@ export class SignUp implements OnInit {
     'type':''
   };
 
+  error = false;
   constructor(private auth: AuthService, private router: Router) {
 
   }
@@ -55,7 +56,13 @@ export class SignUp implements OnInit {
 
 
   submit() {
+    if(
+      this.user.name !== '' &&
+      this.user.email !=='' && 
+      this.user.pw !== '' &&
+      this.user.type !== ''
     
+     ){
     this.auth.signUp(this.user).subscribe(
       (res) => {
       console.log("done!");
@@ -66,7 +73,11 @@ export class SignUp implements OnInit {
     },
     (err) =>
     alert("error !!")
-    );
+    );}
+    else{
+        this.error = true;  
+    }
+
   }
 
 }

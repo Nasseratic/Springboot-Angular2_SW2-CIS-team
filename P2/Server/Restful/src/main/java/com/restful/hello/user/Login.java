@@ -1,4 +1,4 @@
-package hello.user;
+package com.restful.hello.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseServiceService } from './../../services/course-service.service';
+import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router'
 import { ActivatedRoute } from '@angular/router'
 
@@ -15,7 +16,7 @@ export class CourseCardComponent implements OnInit {
   view_name = "ALL COURSES";
   id : any;
 
-  constructor(private service:CourseServiceService , private router: Router, private aRouter: ActivatedRoute) {
+  constructor(private service:CourseServiceService , private router: Router, private aRouter: ActivatedRoute , private auth:AuthService) {
 
 
   }
@@ -39,5 +40,14 @@ export class CourseCardComponent implements OnInit {
     viewCourse(id) {
       this.router.navigate(['/course',id]);
   }
+
+
+addButton(){
+  if( this.auth.getType() == 'Teacher')
+  return true;
+  else
+  return false;
+}
+
 
 }

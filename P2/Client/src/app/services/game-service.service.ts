@@ -18,7 +18,7 @@ export class GameServiceService {
   constructor(private http: Http) { }
 
   getGames(): Rx.Observable<any> {
-    return this.http.get('http://localhost:8080/games/').map(this.extractData).publish().refCount();
+    return this.http.get('http://localhost:8080/api/games/').map(this.extractData).publish().refCount();
   }
 
   private extractData(res: Response) {
@@ -28,9 +28,9 @@ export class GameServiceService {
 
   createGame(game, answers) {
 
-    let body = JSON.stringify({ 'id': "", 'name': game.name, 'teacher': game.teacher, 'category': game.category });
+    let body = JSON.stringify({ 'id': "", 'name': game.name, 'courseId': game.teacher, 'category': game.category });
     console.log({ 'id': "", 'name': game.name, 'teacher': game.teacher, 'category': game.category });
-    this.http.post('http://localhost:8080/create/game/', body, this.options).publish().refCount().subscribe(
+    this.http.post('http://localhost:8080/api/create/game/', body, this.options).publish().refCount().subscribe(
       (res) => {
         console.log(game.name + " created!");
         let gameid = res['_body'];
@@ -45,13 +45,17 @@ export class GameServiceService {
   }
 
 
-  getQs(id: string): Rx.Observable<any> {
-    return this.http.get('http://localhost:8080/game/'+id).map(this.extractData).publish().refCount();    
+  getQs(id: string): Rx.Observable<any>{
+    return  this.http.get('http://localhost:8080/api/q/'+id).map(this.extractData).publish().refCount() ;    
+  }
+
+  getGame(id: string): Rx.Observable<any>{
+      return this.http.get('http://localhost:8080/api/game/'+id).map(this.extractData).publish().refCount();
   }
 
   addQ(id: string, q, a) {
-    let body = JSON.stringify({ "q": q.q, "a": q.a, "ra": a });
-    this.http.post('http://localhost:8080/add/q/' + id, body, this.options).publish().refCount().subscribe( 
+    let body = JSON.stringify({ "q": q.q, "a": q.a, "ra": a , "gameId": id});
+    this.http.post('http://localhost:8080/api/add/q', body, this.options).publish().refCount().subscribe( 
       () => console.log(q + "added")
       
     );

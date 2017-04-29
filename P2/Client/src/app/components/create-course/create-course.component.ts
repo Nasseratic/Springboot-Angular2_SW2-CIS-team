@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseServiceService } from "../../services/course-service.service"
+import { AuthService } from "../../services/auth.service"
+import {Router } from '@angular/router'
 
 @Component({
   selector: 'app-create-course',
@@ -24,14 +27,33 @@ import { Component, OnInit } from '@angular/core';
   margin: 15px 0;
 }
 
-`]
+`],
+providers:[CourseServiceService]
 })
 export class CreateCourseComponent implements OnInit {
 
-  selectedtype: any;
-  categories = ["Math","Science","Programming"];
-  constructor() { }
+  name='';
+  error=false;
+  constructor(private courseService: CourseServiceService , private router:Router , public auth:AuthService){
 
+  }
+
+
+
+  submit(){
+    if(this.name !== ''){
+      this.courseService.createCourse(this.name).subscribe(
+      (res) => {
+        console.log(res.name + " created!");
+        this.router.navigate(['/course/'+res.id]);
+    });;
+      
+      }
+    else{
+      this.error=true;
+    }
+
+  }
   ngOnInit() {
   }
 

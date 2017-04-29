@@ -49,6 +49,13 @@
 
   </div>
 
+
+<!-- fad add button -->
+<button  *ngIf="addButton()" (click)="this.router.navigate(['/create/course/']);" md-fab style="position:absolute; z-index: 999; bottom:20%; right:6%;">
+  <md-icon>add</md-icon>
+</button>
+
+
 </md-card>
 
 

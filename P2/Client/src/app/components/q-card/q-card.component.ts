@@ -76,11 +76,12 @@ export class QCardComponent implements OnInit {
   ngOnInit() {
     let id = this.aRouter.snapshot.params['id'];
     this.id = id;
-
-          this.gameServiceService.getQs(id).subscribe(qs => {this.qs = qs.qs
-            this.game_name = qs.name;
+    this.gameServiceService.getGame(id).subscribe( game => {
+          this.game_name = game.name;
+    });
+          this.gameServiceService.getQs(id).subscribe(qs => {this.qs = qs
             this.qs.forEach(q => {
-            this.answers.push(q.ra)                                           
+            this.answers.push(q.ra)     
           });                       
         });
 

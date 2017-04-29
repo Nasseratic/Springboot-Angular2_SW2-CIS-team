@@ -1,29 +1,32 @@
-package hello.user;
+package com.restful.hello.user;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-
-@Component
-public class User {
-
-	private String id;
+@Entity
+public class ApiUser {
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	private Integer id;
 	private String name;
 	private String email;
 	private String pw;
 	private String type;
 
-	public User() {
+	public ApiUser() {
 		
 	}
 	
-	public User(String id, String name, String email, String pw, String type) {
-		super();
+	public ApiUser(Integer id, String name, String email, String pw, String type) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.pw = pw;
 		this.type = type;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -43,15 +46,13 @@ public class User {
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {

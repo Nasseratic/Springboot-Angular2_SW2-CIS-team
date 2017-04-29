@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameServiceService } from "../../services/game-service.service"
+import {ActivatedRoute ,Router } from '@angular/router'
 
 @Component({
   selector: 'app-create-game',
@@ -35,7 +36,7 @@ export class CreateGameComponent implements OnInit {
   name: string;
   description: string;
   selectedtype: string;
-  constructor(private gameService: GameServiceService) { }
+  constructor(private gameService: GameServiceService , private router:Router , private aRouter : ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -52,7 +53,8 @@ export class CreateGameComponent implements OnInit {
   }
 
   createGame() {
-    let game = { 'id': '', 'name': this.name, 'teacher': localStorage.getItem("id"), 'category': this.selectedtype, 'qs': this.qs };
+    let id = this.aRouter.snapshot.params['courseId'];
+    let game = { 'id': '', 'name': this.name, 'courseId': id , 'category': this.selectedtype, 'qs': this.qs };
     this.gameService.createGame(game,this.answers);
    }
    

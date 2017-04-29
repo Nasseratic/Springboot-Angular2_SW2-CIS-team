@@ -5,7 +5,6 @@
   <button md-button (click)="openLoginDialog();" *ngIf="userName == ''"  style="color: white ; font-weight: 600;">
     LOG IN
   </button>
-  <h5 style="color:#fff;" *ngIf="userName !== ''" > Welcome : {{userName}} </h5>
   <button *ngIf="userName !== ''" md-icon-button style="color:#fff; margin-bottom: -5px;" [mdMenuTriggerFor]="menu" >
     <md-icon>more_vert</md-icon>
   </button>
@@ -22,6 +21,10 @@
     </button>
      -->
 
+      <button md-menu-item disabled>
+      Welcome : {{userName}}
+    </button>
+   
     <button md-menu-item *ngIf="this.auth.getType() == 'Teacher' " (click)="routToMycourses()" >
       <md-icon>school</md-icon>
       <span>My Courses </span>

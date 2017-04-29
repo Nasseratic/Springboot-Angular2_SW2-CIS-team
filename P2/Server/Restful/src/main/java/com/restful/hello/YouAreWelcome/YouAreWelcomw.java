@@ -1,4 +1,4 @@
-package hello.YouAreWelcome;
+package com.restful.hello.YouAreWelcome;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

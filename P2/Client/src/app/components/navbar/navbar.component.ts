@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.auth.setUser("", "", "");
-    this.router.navigate(["/"]);
+    this.router.navigate(["/x"]);
   }
 
   ngOnInit() {
@@ -108,7 +108,7 @@ export class DialogResultExampleDialog2 {
         this.auth.setUser(res.name, res.type, res.id);
         console.log(res.name);
         this.close();
-        this.router.navigate(['/']);
+        this.router.navigate(['/x']);
       },
       (err) => {
         alert("ERROR! TRY AGAIN !")

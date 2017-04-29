@@ -3,6 +3,7 @@ import { Http } from "@angular/http";
 import { GameServiceService } from "../../services/game-service.service"
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
+import {AuthService} from "../../services/auth.service"
 @Component({
   selector: 'game-cards',
   templateUrl: './game-card.component.html',
@@ -15,7 +16,7 @@ export class GameCardComponent implements OnInit {
   games = [];
   id :  any ;
 
-  constructor(private http: Http, private gameServiceService: GameServiceService, private router: Router, private aRouter: ActivatedRoute) {
+  constructor(private http: Http, private gameServiceService: GameServiceService, private router: Router, private aRouter: ActivatedRoute , public auth:AuthService) {
 
   }
 
@@ -27,7 +28,11 @@ export class GameCardComponent implements OnInit {
     this.id = id;
 
     if (id) {
-      console.log("hey");
+      this.gameServiceService.getGame(id).subscribe(
+        (res) => {
+        this.games=res;
+        
+      });
 
     }
 
@@ -59,5 +64,12 @@ export class GameCardComponent implements OnInit {
     this.router.navigate(['/game', id]);
   }
 
+
+addButton(){
+  if( String(this.auth.getType()) == 'Teacher' && this.id != undefined )
+  return true;
+  else
+  return false;
+}
 
 }

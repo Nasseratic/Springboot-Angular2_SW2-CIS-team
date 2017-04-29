@@ -14,7 +14,7 @@
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input mdInput placeholder="Course Name">
+            <input mdInput placeholder="Course Name" [(ngModel)]="name" name="Course Name">
           </md-input-container>
         </td>
       </tr>
@@ -25,7 +25,7 @@
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <textarea mdInput placeholder="description" type="text">  </textarea>
+            <textarea mdInput placeholder="description ( optional )" type="text">  </textarea>
           </md-input-container>
         </td>
       </tr>
@@ -41,14 +41,9 @@
       <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
-          <md-radio-group  class="example-radio-group" [(ngModel)]="selectedtype">
-      <md-radio-button class="example-radio-button" *ngFor="let category of categories" [value]="category">
-        {{category}}
-      </md-radio-button>
-    </md-radio-group>
         </td>
         <td>
-          <button md-button style="background: #ff1744; color:#fbfbfb; float: right; min-width:50%" > Create Course </button>
+          <button (click)="submit()" md-button style="background: #ff1744; color:#fbfbfb; float: right; min-width:50%" > Create Course </button>
         </td>
       </tr>
       
