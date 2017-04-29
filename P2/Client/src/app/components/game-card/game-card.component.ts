@@ -28,10 +28,19 @@ export class GameCardComponent implements OnInit {
     this.id = id;
 
     if (id) {
-      this.gameServiceService.getGame(id).subscribe(
+      this.gameServiceService.getGamesOfcourse(id).subscribe(
         (res) => {
         this.games=res;
-        
+        this.games.forEach(game => {
+          game.img = "./assets/gamification-760.jpg"
+          if(game.category == "Programming")
+            game.icon = "memory";
+          else if (game.category == "Math")
+            game.icon = "widgets"
+          else if (game.category == "Science")
+            game.icon = "opacity"
+          else game.icon = "translate"
+        })
       });
 
     }

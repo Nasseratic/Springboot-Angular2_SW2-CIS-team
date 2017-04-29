@@ -25,7 +25,7 @@ public class UserService {
 
         /////////////////////////////////////////////method//
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public ResponseEntity<?> getUser(@RequestBody Login login) {
+    public ResponseEntity<?> loginUser(@RequestBody Login login) {
         logger.info("api :" + login.getEmail() + "logging");
         ApiUser user = userService.findByEmail(login.getEmail());
         if ( user != null && user.getPw().equals(login.getPw()) )

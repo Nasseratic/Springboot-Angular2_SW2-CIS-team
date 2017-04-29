@@ -36,7 +36,12 @@ export class CreateGameComponent implements OnInit {
   name: string;
   description: string;
   selectedtype: string;
-  constructor(private gameService: GameServiceService , private router:Router , private aRouter : ActivatedRoute) { }
+  id : number;
+  constructor(private gameService: GameServiceService , private router:Router , private aRouter : ActivatedRoute) { 
+    this.id = this.aRouter.snapshot.params['id'];
+    console.log("courseid:"+ this.id);
+    
+  }
 
   ngOnInit() {
   }
@@ -53,11 +58,16 @@ export class CreateGameComponent implements OnInit {
   }
 
   createGame() {
-    let id = this.aRouter.snapshot.params['courseId'];
-    let game = { 'id': '', 'name': this.name, 'courseId': id , 'category': this.selectedtype, 'qs': this.qs };
-    this.gameService.createGame(game,this.answers);
+    let game = { 'id': '', 'name': this.name, 'courseId': this.id , 'category': this.selectedtype};
+    this.gameService.createGame(game).subscribe( game => {
+        this.qs.forEach((q,index)=>{ 
+        this.gameService.addQ(game.id,q,this.answers[index]);
+        this.router.navigate(['/game/'+game.id]);                      
+        }); 
+    } );
+    
    }
-   
+
   delete(i: number) {
     if (i === 0) this.qs.splice(i, i + 1);
     else

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'game/:id', component: QCardComponent },
   { path: 'course/:id', component: GameCardComponent },  
   { path: 'create/course', component: CreateCourseComponent },    
-  { path: 'create/game', component: CreateGameComponent },      
+  { path: 'create/game/:id', component: CreateGameComponent },      
   { path: 'signup', component: SignUp },  
   { path: '**', redirectTo: '/' }
 ];

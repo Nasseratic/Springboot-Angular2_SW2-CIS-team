@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface GameModel extends CrudRepository<Game, Integer> {
-    public List<Game> findByCourseId(Integer id);
+    public List<Game> findByCourseId(String id);
 
 }
 

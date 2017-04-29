@@ -53,9 +53,9 @@ public class GameService {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/games/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Game>> getGamesByCourse(){
+    public ResponseEntity<List<Game>> getGamesByCourse( @PathVariable  String id){
         logger.info("requesting All Games");
-        List<Game> game = (List<Game>) gameModel.findAll();
+        List<Game> game = (List<Game>) gameModel.findByCourseId(id);
         return new ResponseEntity<List<Game>>(game, HttpStatus.OK);
     }
 

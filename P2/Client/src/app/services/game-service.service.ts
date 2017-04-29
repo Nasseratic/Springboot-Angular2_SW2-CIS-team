@@ -21,27 +21,21 @@ export class GameServiceService {
     return this.http.get('http://localhost:8080/api/games/').map(this.extractData).publish().refCount();
   }
 
+
+  getGamesOfcourse(id): Rx.Observable<any> {
+    return this.http.get('http://localhost:8080/api/games/'+id).map(this.extractData).publish().refCount();
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body || {};
   }
 
-  createGame(game, answers) {
+  createGame(game): Rx.Observable<any> {
 
-    let body = JSON.stringify({ 'id': "", 'name': game.name, 'courseId': game.teacher, 'category': game.category });
+    let body = JSON.stringify({ 'id': "", 'name': game.name, 'courseId': game.courseId, 'category': game.category });
     console.log({ 'id': "", 'name': game.name, 'teacher': game.teacher, 'category': game.category });
-    this.http.post('http://localhost:8080/api/create/game/', body, this.options).publish().refCount().subscribe(
-      (res) => {
-        console.log(game.name + " created!");
-        let gameid = res['_body'];
-        game.qs.forEach((q, index) => {
-          this.addQ(gameid, q, answers[index]);
-          console.log(q);
-          console.log(answers[index]);
-
-        });
-
-      });
+    return this.http.post('http://localhost:8080/api/create/game/', body, this.options).map(this.extractData).publish().refCount();
   }
 
 
@@ -55,7 +49,7 @@ export class GameServiceService {
 
   addQ(id: string, q, a) {
     let body = JSON.stringify({ "q": q.q, "a": q.a, "ra": a , "gameId": id});
-    this.http.post('http://localhost:8080/api/add/q', body, this.options).publish().refCount().subscribe( 
+    this.http.post('http://localhost:8080/api/add/q/', body, this.options).publish().refCount().subscribe( 
       () => console.log(q + "added")
       
     );
