@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit {
 
 
   routToMycourses() {
-      this.router.navigate(['/courses'] , { queryParams: {} } );
+      this.router.navigate(['/courses',this.auth.getId()] , { queryParams: {} } );
   }
 
 

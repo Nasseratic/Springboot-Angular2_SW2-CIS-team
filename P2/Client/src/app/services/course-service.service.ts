@@ -16,6 +16,9 @@ export class CourseServiceService {
         return this.http.get('http://localhost:8080/api/courses/').map(this.extractData).publish().refCount();
     }
     
+    getCoursesByTeacher(id): Rx.Observable<any> {
+        return this.http.get('http://localhost:8080/api/courses/'+id).map(this.extractData).publish().refCount();
+    }
     
 
 createCourse(name): Rx.Observable<any> {

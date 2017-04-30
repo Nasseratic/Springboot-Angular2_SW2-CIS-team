@@ -75,7 +75,7 @@ export class GameCardComponent implements OnInit {
 
 
 addButton(){
-  if( String(this.auth.getType()) == 'Teacher' && this.id != undefined )
+  if( String(this.auth.getType()) == 'Teacher' && this.id != undefined && this.gameServiceService.isMyCourse( this.id , this.auth.getId()) )
   return true;
   else
   return false;

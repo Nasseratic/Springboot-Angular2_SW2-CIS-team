@@ -28,8 +28,7 @@ export class CourseCardComponent implements OnInit {
     this.id = id;
 
     if (id) {
-      console.log("hey");
-
+      this.service.getCoursesByTeacher(id).subscribe(courses => this.courses = courses);      
     }
     else {
       this.service.getCourses().subscribe(courses => this.courses = courses);      

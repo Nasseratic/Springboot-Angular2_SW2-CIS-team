@@ -46,7 +46,7 @@ export class CreateCourseComponent implements OnInit {
       (res) => {
         console.log(res.name + " created!");
         this.router.navigate(['/course/'+res.id]);
-    });;
+    });
       
       }
     else{
