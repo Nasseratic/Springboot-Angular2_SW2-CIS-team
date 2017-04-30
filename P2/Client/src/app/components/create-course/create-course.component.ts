@@ -42,7 +42,7 @@ export class CreateCourseComponent implements OnInit {
 
   submit(){
     if(this.name !== ''){
-      this.courseService.createCourse(this.name).subscribe(
+      this.courseService.createCourse(this.name, this.auth.getId() ).subscribe(
       (res) => {
         console.log(res.name + " created!");
         this.router.navigate(['/course/'+res.id]);

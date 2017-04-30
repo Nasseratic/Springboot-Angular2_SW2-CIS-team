@@ -15,20 +15,25 @@ export class GameCardComponent implements OnInit {
   view_name = "ALL GAMES";
   games = [];
   id :  any ;
-
+  isMyCourse = false;
   constructor(private http: Http, private gameServiceService: GameServiceService, private router: Router, private aRouter: ActivatedRoute , public auth:AuthService) {
 
+    let id = this.aRouter.snapshot.params['id'];
+    this.id = id;
+    this.gameServiceService.isMyCourse( this.id , this.auth.getId()).subscribe( res => {
+      console.log(res);
+         this.isMyCourse = res ;
+    });
+     
   }
 
 
 
   ngOnInit() {
 
-    let id = this.aRouter.snapshot.params['id'];
-    this.id = id;
-
-    if (id) {
-      this.gameServiceService.getGamesOfcourse(id).subscribe(
+    if (this.id) {
+      
+      this.gameServiceService.getGamesOfcourse(this.id).subscribe(
         (res) => {
         this.games=res;
         this.games.forEach(game => {
@@ -75,7 +80,8 @@ export class GameCardComponent implements OnInit {
 
 
 addButton(){
-  if( String(this.auth.getType()) == 'Teacher' && this.id != undefined && this.gameServiceService.isMyCourse( this.id , this.auth.getId()) )
+  console.log(this.auth.getType() +' wee ' + this.isMyCourse );
+  if( this.auth.getType() == 'Teacher' && this.isMyCourse === true )
   return true;
   else
   return false;

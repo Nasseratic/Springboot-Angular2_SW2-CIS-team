@@ -24,7 +24,7 @@ public class CourseService {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/create/course", method = RequestMethod.POST)
-    public ResponseEntity<?> createGame(@RequestBody Course course){
+    public ResponseEntity<?> createCourse(@RequestBody Course course){
         logger.info("Creating Game : {}", course.getName());
         courseModel.save(course);
         return new ResponseEntity<Course>(course, HttpStatus.OK);
@@ -45,7 +45,8 @@ public class CourseService {
     @RequestMapping(value = "/courses/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Course>> getCourseByTeacher(@PathVariable  int id){
         logger.info("requesting courses for Teacher");
-        List<Course> courses = (List<Course>) courseModel.findAll();
+        List<Course> courses = (List<Course>) courseModel.findByTeacherId(id);
+        logger.info( courses.size()+"courses for this Teacher");
         return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
     }
 
@@ -53,7 +54,7 @@ public class CourseService {
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/ismycourse/{courseId}/{teacherId}", method = RequestMethod.GET)
     public ResponseEntity<Boolean> isMyCourse(@PathVariable int courseId, @PathVariable int teacherId) {
-        logger.info("requesting courses for Teacher");
+        logger.info("IS my course ?");
 
             if (courseModel.findOne(courseId).getTeacherId() == teacherId)
                 return new ResponseEntity<Boolean>(true, HttpStatus.OK);

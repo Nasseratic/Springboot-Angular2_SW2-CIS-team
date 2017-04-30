@@ -26,11 +26,8 @@ export class GameServiceService {
     return this.http.get('http://localhost:8080/api/games/'+id).map(this.extractData).publish().refCount();
   }
 
-  isMyCourse(courseId,teacherId){
-    this.http.get('http://localhost:8080/api/ismycourse/'+courseId+"/"+teacherId).map(this.extractData).publish().refCount().subscribe( res => {
-      console.log(res);
-      return res;
-    });
+  isMyCourse(courseId,teacherId): Rx.Observable<any>{
+    return this.http.get('http://localhost:8080/api/ismycourse/'+courseId+"/"+teacherId).map(this.extractData).publish().refCount();
   }
 
   private extractData(res: Response) {

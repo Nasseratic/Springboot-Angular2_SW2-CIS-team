@@ -21,9 +21,9 @@ export class CourseServiceService {
     }
     
 
-createCourse(name): Rx.Observable<any> {
+createCourse(name,id): Rx.Observable<any> {
 
-    let body = JSON.stringify({"name":name , "teacherId":3});
+    let body = JSON.stringify({"name":name , "teacherId":id});
     console.log("creating:" +name);
     console.log(body);
     return this.http.post('http://localhost:8080/api/create/course/', body, this.options).map(this.extractData).publish().refCount();
