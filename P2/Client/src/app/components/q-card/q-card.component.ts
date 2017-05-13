@@ -2,6 +2,7 @@ import { Component, OnInit , Input } from '@angular/core';
 import {Http} from "@angular/http";
 import {ActivatedRoute ,Router } from '@angular/router'
 import {GameServiceService} from '../../services/game-service.service'
+import {AuthService} from '../../services/auth.service'
 import {MdDialog, MdDialogRef} from "@angular/material";
 import {
   trigger,
@@ -46,8 +47,10 @@ export class QCardComponent implements OnInit {
   selected=[];
   answers=[];
   id ;
+  edit;
+  isMyGame;
   decision :string;   
-  constructor(private http:Http, private aRouter:ActivatedRoute, private gameServiceService:GameServiceService ,public dialog: MdDialog , private router:Router ) {
+  constructor(private http:Http, private aRouter:ActivatedRoute, private gameServiceService:GameServiceService ,public dialog: MdDialog , private router:Router , private auth : AuthService) {
 
     
   }
@@ -74,12 +77,20 @@ export class QCardComponent implements OnInit {
 }
 
   ngOnInit() {
+    
     let id = this.aRouter.snapshot.params['id'];
     this.id = id;
 
     this.gameServiceService.getGame(id).subscribe( game => {
           this.game_name = game.name;
-    });
+          this.edit = game.courseId;
+          this.gameServiceService.isMyCourse(game.courseId, this.auth.getId() ).subscribe(
+            res => {
+              if(res == 1)
+              this.isMyGame = true;
+            }
+          );
+  });
 
     this.gameServiceService.getQs(id).subscribe(qs => {
             console.log(qs);
@@ -97,6 +108,12 @@ export class QCardComponent implements OnInit {
       this.router.navigate(['../']);
     }
 
+    editButton(){
+        if(this.isMyGame === true )
+          return true;
+          else
+          return false;
+    }
 
 
 }

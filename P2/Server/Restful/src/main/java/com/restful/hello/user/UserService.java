@@ -39,11 +39,11 @@ public class UserService {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/create/users/", method = RequestMethod.POST)
-    public ResponseEntity<?> createUser(@RequestBody ApiUser users) {
-        logger.info("Creating Api_user : {}", users.getEmail());
-        if (userService.findByEmail(users.getEmail()) ==  null) {
-            userService.save(users);
-            return new ResponseEntity<ApiUser>(users, HttpStatus.OK);
+    public ResponseEntity<?> createUser(@RequestBody ApiUser user) {
+        logger.info("Creating Api_user : {}", user.getEmail());
+        if (userService.findByEmail(user.getEmail()) ==  null) {
+            userService.save(user);
+            return new ResponseEntity<ApiUser>(user, HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

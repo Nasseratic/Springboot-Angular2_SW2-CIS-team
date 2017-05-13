@@ -63,10 +63,11 @@ export class SignUp implements OnInit {
       this.user.type !== ''
     
      ){
-    this.auth.signUp(this.user).subscribe(
+
+      this.auth.signUp(this.user).subscribe(
       (res) => {
       console.log("done!");
-      this.auth.setUser(this.user.name , this.user.type , res['_body'] );
+      this.auth.setUser(this.user.name , this.user.type , res.id );
       console.log(this.user.name);
       this.router.navigate(['/']);
       

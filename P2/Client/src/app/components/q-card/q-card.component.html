@@ -2,8 +2,9 @@
 
 
   <md-card>
-     
+
     <md-card-title>{{game_name}}</md-card-title>
+
     <!--<md-card-subtitle>Subtitle Card with title</md-card-subtitle>-->
   </md-card>
 
@@ -29,21 +30,24 @@
 
   <md-card>
 
-<button (click)="back()" md-button style="background-color: #000 ; color:#fff;">
+    <button (click)="back()" md-button style="background-color: #000 ; color:#fff;">
 
             <span>Back</span>
             <md-icon>arrow_back</md-icon>
 
-          </button>
+    </button>
+
     <button (click)="correctingDialog()" md-button style="background-color: #FF5722 ; color:#fff;">
 
             <span>Submit &nbsp;</span>
             <md-icon>done</md-icon>
 
-          </button>
+    </button>
 
 
 
   </md-card>
+
+<button md-fab  *ngIf="editButton()" (click)="this.router.navigate(['/create/game/', edit, id ]);" style="position:fixed; z-index: 999; bottom:20%; right:6%"> <md-icon>border_color</md-icon> </button>
 
 </md-card>

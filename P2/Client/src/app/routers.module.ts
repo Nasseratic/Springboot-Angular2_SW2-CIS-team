@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'course/:id', component: GameCardComponent },  
   { path: 'courses/:id', component: CourseCardComponent },    
   { path: 'create/course', component: CreateCourseComponent },    
-  { path: 'create/game/:id', component: CreateGameComponent },      
+  { path: 'create/game/:id', component: CreateGameComponent },
+  { path: 'create/game/:id/:edit', component: CreateGameComponent },              
   { path: 'signup', component: SignUp },  
   { path: '**', redirectTo: '/' }
 ];

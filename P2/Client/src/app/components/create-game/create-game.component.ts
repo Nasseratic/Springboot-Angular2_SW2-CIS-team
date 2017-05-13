@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameServiceService } from "../../services/game-service.service"
 import {ActivatedRoute ,Router } from '@angular/router'
+import './Game'
 
 @Component({
   selector: 'app-create-game',
@@ -31,20 +32,48 @@ providers:[GameServiceService]
 })
 export class CreateGameComponent implements OnInit {
   categories = ["Math", "Science", "Programming" , "Languages"];
+  game : Game;
+  view = "Create New Game"
   qs = [{ "q": "", "a": [] }];
   answers = [];
   name: string;
   description: string;
   selectedtype: string;
+  available= false;
   id : number;
+  edit:number;
+  qid = [];
   constructor(private gameService: GameServiceService , private router:Router , private aRouter : ActivatedRoute) { 
-    this.id = this.aRouter.snapshot.params['id'];
-    console.log("courseid:"+ this.id);
     
   }
 
   ngOnInit() {
-  }
+    this.id = this.aRouter.snapshot.params['id'];
+    this.edit = this.aRouter.snapshot.params['edit'];  
+    //check if it is an edit 
+    if(this.edit !== undefined){
+        let game = this.gameService.getGame(String(this.edit));
+        game.subscribe(
+          (game)=>{
+            this.name = game.name;
+            this.view = "edit Game";
+            this.selectedtype = game.category;
+            this.available = game.available;
+            this.qs.pop();  
+            this.gameService.getQs(game.id).subscribe(
+              (qs) => {
+                qs.forEach( q => {
+                    this.qid.push(q.id);
+                    this.answers.push(q.ra);
+                    this.qs.push({"q": q.q , "a":q.a});
+
+                }); 
+              }
+            );
+          }
+        );
+    }
+}
 
 
   update(value: string, i: number) { if (value !== "") this.qs[i].a.push(value); value = ""; }
@@ -54,17 +83,19 @@ export class CreateGameComponent implements OnInit {
   addQ() {
     this.qs.push({ "q": "", "a": [] })
     console.log(this.qs);
+    console.log("this is " + this.available );
 
   }
 
   createGame() {
-    let game = { 'id': '', 'name': this.name, 'courseId': this.id , 'category': this.selectedtype};
+
+    let game = { 'id': this.edit , 'name': this.name, 'courseId': this.id , 'category': this.selectedtype , 'available' : this.available};
     this.gameService.createGame(game).subscribe( game => {
         this.qs.forEach((q,index)=>{ 
-        this.gameService.addQ(game.id,q,this.answers[index]);
+        this.gameService.addQ( game.id,q,this.answers[index] , this.qid[index]);
         this.router.navigate(['/game/'+game.id]);                      
         }); 
-    } );
+    });
     
    }
 
@@ -72,6 +103,7 @@ export class CreateGameComponent implements OnInit {
     if (i === 0) this.qs.splice(i, i + 1);
     else
       this.qs.splice(i, i);
+    
   }
 
   deleteA(i: number, j: number) {

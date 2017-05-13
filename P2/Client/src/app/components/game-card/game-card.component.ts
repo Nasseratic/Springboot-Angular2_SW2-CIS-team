@@ -20,7 +20,8 @@ export class GameCardComponent implements OnInit {
 
     let id = this.aRouter.snapshot.params['id'];
     this.id = id;
-    this.gameServiceService.isMyCourse( this.id , this.auth.getId()).subscribe( res => {
+    if(id !== undefined)
+    this.gameServiceService.isMyCourse( this.id , this.auth.getId()).subscribe( (res) => {
       console.log(res);
          this.isMyCourse = res ;
     });
@@ -31,10 +32,16 @@ export class GameCardComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.id) {
-      
-      this.gameServiceService.getGamesOfcourse(this.id).subscribe(
+    let id = this.aRouter.snapshot.params['id'];
+    this.id = id;
+    if(id !== undefined)
+    this.gameServiceService.isMyCourse( this.id , this.auth.getId() ).subscribe( (res) => {
+        if(res == 1)
+        this.isMyCourse = true ;
+        
+        this.gameServiceService.getGamesOfcourse(this.id , res).subscribe(
         (res) => {
+          this.view_name = "Course Content";
         this.games=res;
         this.games.forEach(game => {
           game.img = "./assets/gamification-760.jpg"
@@ -48,8 +55,7 @@ export class GameCardComponent implements OnInit {
         })
       });
 
-    }
-
+    });
     else {
       
       this.gameServiceService.getGames().subscribe(games => {
@@ -80,7 +86,6 @@ export class GameCardComponent implements OnInit {
 
 
 addButton(){
-  console.log(this.auth.getType() +' wee ' + this.isMyCourse );
   if( this.auth.getType() == 'Teacher' && this.isMyCourse === true )
   return true;
   else

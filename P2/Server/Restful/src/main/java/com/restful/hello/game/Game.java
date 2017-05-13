@@ -15,17 +15,26 @@ public class Game {
 	private String name;
 	private String courseId;
 	private String category;
+	private boolean available;
 	public Game() {
-		
+
 	}
 
 
-	public Game(Integer id, String name, String courseId, String category) {
+	public Game(Integer id, String name, String courseId, String category,boolean available) {
 		this.id = id;
 		this.name = name;
 		this.courseId = courseId;
 		this.category = category;
+		this.available = available;
+	}
 
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	public Integer getId(){

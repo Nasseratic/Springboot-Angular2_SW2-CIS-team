@@ -46,7 +46,7 @@ public class GameService {
     @RequestMapping(value = "/games", method = RequestMethod.GET)
     public ResponseEntity<List<Game>> getGames(){
         logger.info("requesting All Games");
-        List<Game> game = (List<Game>) gameModel.findAll();
+        List<Game> game = (List<Game>) gameModel.findByAvailable(true);
         return new ResponseEntity<List<Game>>(game, HttpStatus.OK);
     }
 
@@ -55,11 +55,18 @@ public class GameService {
     @RequestMapping(value = "/games/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Game>> getGamesByCourse( @PathVariable  String id){
         logger.info("requesting All Games");
-        List<Game> game = (List<Game>) gameModel.findByCourseId(id);
+        List<Game> game = (List<Game>) gameModel.findByCourseIdAndAvailable(id,true);
         return new ResponseEntity<List<Game>>(game, HttpStatus.OK);
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/mygames/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Game>> getMyGamesByCourse( @PathVariable  String id){
+        logger.info("requesting hidden Games");
+        List<Game> game = (List<Game>) gameModel.findByCourseId(id);
+        return new ResponseEntity<List<Game>>(game, HttpStatus.OK);
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/game/{id}", method = RequestMethod.GET)
@@ -77,5 +84,18 @@ public class GameService {
         List<Question> qs = questionModel.findByGameId(id);
         return new ResponseEntity<List<Question>>( qs ,HttpStatus.OK);
     }
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/update/game", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateGame(@RequestBody Game game){
+        logger.info("Creating Game : {}", game.getName());
+        gameModel.save(game);
+        return new ResponseEntity<Game>(game, HttpStatus.OK);
+    }
+
+
 
 }

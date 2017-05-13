@@ -28,6 +28,7 @@ export class CourseCardComponent implements OnInit {
     this.id = id;
 
     if (id) {
+      this.view_name =" My courses";
       this.service.getCoursesByTeacher(id).subscribe(courses => this.courses = courses);      
     }
     else {
@@ -37,7 +38,9 @@ export class CourseCardComponent implements OnInit {
   }
 
     viewCourse(id) {
+     
       this.router.navigate(['/course',id]);
+      
   }
 
 

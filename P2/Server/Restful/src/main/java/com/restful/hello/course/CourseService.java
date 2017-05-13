@@ -31,7 +31,6 @@ public class CourseService {
     }
 
 
-
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public ResponseEntity<List<Course>> getCourses(){
@@ -45,7 +44,7 @@ public class CourseService {
     @RequestMapping(value = "/courses/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Course>> getCourseByTeacher(@PathVariable  int id){
         logger.info("requesting courses for Teacher");
-        List<Course> courses = (List<Course>) courseModel.findByTeacherId(id);
+        List<Course> courses =  courseModel.findByTeacherId(id);
         logger.info( courses.size()+"courses for this Teacher");
         return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
     }
@@ -53,13 +52,12 @@ public class CourseService {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/ismycourse/{courseId}/{teacherId}", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> isMyCourse(@PathVariable int courseId, @PathVariable int teacherId) {
+    public ResponseEntity<Integer> isMyCourse(@PathVariable int courseId, @PathVariable int teacherId) {
         logger.info("IS my course ?");
-
             if (courseModel.findOne(courseId).getTeacherId() == teacherId)
-                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+                return new ResponseEntity<Integer>(1, HttpStatus.OK);
             else
-                return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+                return new ResponseEntity<Integer>(0, HttpStatus.OK);
     }
 
 

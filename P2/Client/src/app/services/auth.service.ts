@@ -27,7 +27,7 @@ export class AuthService {
     let body = JSON.stringify({ "name":user.name , "pw":user.pw , "id":user.id , "email":user.email, "type":user.type});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
-    return this.http.post('http://localhost:8080/api/create/users/', body , options );
+    return this.http.post('http://localhost:8080/api/create/users/', body , options ).map(this.extractData).publish().refCount();
     
   }
 

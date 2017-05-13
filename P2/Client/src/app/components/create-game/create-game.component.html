@@ -3,7 +3,7 @@
 
 
   <md-card class="example-form " layout-align="center center" style="margin: 3%; margin-top:0%; margin-bottom:0%; padding:2%;">
-    <h2 style="text-align: center; color:#ff1744; padding-top:1%;"> New Game </h2>
+    <h2 style="text-align: center; color:#ff1744; padding-top:1%;"> {{view}} </h2>
   </md-card>
 
   <md-card class="example-form " layout-align="center center" style="margin: 3%; margin-bottom:0%; margin-top:0%; padding :2%;">
@@ -43,7 +43,7 @@
     <i class="material-icons" (click)="delete(i)" style="float: right; color:gray; margin-top:-10px;">clear</i>
 
     <md-input-container class="example-full-width">
-      <input mdInput placeholder="Q{{i+1}}" #qi ([value])="q.q" (keyup)="updateQ(qi.value,i);" >
+      <input mdInput placeholder="Q{{i+1}}" #qi [(value)]="q.q" (keyup)="updateQ(qi.value,i);" >
     </md-input-container>
 
     <table class="example-full-width" cellspacing="0">
@@ -95,7 +95,11 @@
           </md-radio-group>
         </td>
         <td>
-          <button md-button style="background: #ff1744; color:#fbfbfb; float: right; min-width:50%" (click)="createGame()" > Create Game &nbsp; &nbsp;  <md-icon>thumb_up</md-icon> </button>
+
+              <md-slide-toggle [checked]="available" (change)="available= !available;"  >
+                  Availability <br> <md-icon *ngIf="available">visibility</md-icon> <md-icon *ngIf="!available">visibility_off</md-icon> 
+              </md-slide-toggle>
+          <button md-button style="background: #ff1744; color:#fbfbfb; float: right; min-width:50%" (click)="createGame()" >  Publish &nbsp; &nbsp; <i class="material-icons">done_all</i>   </button>
         </td>
       </tr>
     </table>
