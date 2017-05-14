@@ -46,7 +46,6 @@ export class GameServiceService {
   createGame(game): Rx.Observable<any> {
 
     let body = JSON.stringify({ 'id': game.id , 'name': game.name, 'courseId': game.courseId, 'category': game.category, 'available': game.available });
-    console.log({ 'id': "", 'name': game.name, 'teacher': game.teacher, 'category': game.category });
     return this.http.post('http://localhost:8080/api/create/game/', body, this.options).map(this.extractData).publish().refCount();
   }
 
@@ -64,6 +63,26 @@ export class GameServiceService {
     this.http.post('http://localhost:8080/api/add/q/', body, this.options).publish().refCount().subscribe(
       () => console.log(q + "added")
 
+    );
+  }
+
+    copyGame(courseId,gameId){
+     this.http.get('http://localhost:8080/api/copy/' + courseId + "/" + gameId ).publish().refCount().subscribe(()=>{});
+     console.log('http://localhost:8080/api/copy/' + courseId + "/" + gameId);
+     
+    }
+
+
+
+  getComments(id: string): Rx.Observable<any> {
+    return this.http.get('http://localhost:8080/api/comments/' + id).map(this.extractData).publish().refCount();
+  }
+
+
+  addComments(id: string , text: string ,authorName:string) {
+    let body = JSON.stringify({ "text": text , "gameId":id , "authorName":authorName });
+    this.http.post('http://localhost:8080/api/comment/', body, this.options).publish().refCount().subscribe(
+      () => console.log(" comment added")
     );
   }
 

@@ -45,6 +45,19 @@
             <span>Play &nbsp;</span>
           </button>
 
+          <button *ngIf="this.auth.getType()=='Teacher'" md-button style="color: #FF5722"  [mdMenuTriggerFor]="copy">
+            <md-icon>content_copy</md-icon>
+            <span> Copy &nbsp;</span>
+          </button>
+
+          <md-menu #copy="mdMenu">
+            <div *ngFor=" let course of courses">
+               <button md-menu-item  (click)="copyGame( course.id , game.id ); openSnackBar();" style="font-size: small;" >
+                    <span> Copy to {{course.name}} &nbsp; </span>
+               </button>
+            </div>
+          </md-menu>
+  
         </md-card-actions>
 
       </md-card>

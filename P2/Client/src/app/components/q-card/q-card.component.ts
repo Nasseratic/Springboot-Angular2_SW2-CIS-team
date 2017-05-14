@@ -50,6 +50,9 @@ export class QCardComponent implements OnInit {
   edit;
   isMyGame;
   decision :string;   
+  user_comment : string;
+  comments=[];
+
   constructor(private http:Http, private aRouter:ActivatedRoute, private gameServiceService:GameServiceService ,public dialog: MdDialog , private router:Router , private auth : AuthService) {
 
     
@@ -91,7 +94,10 @@ export class QCardComponent implements OnInit {
             }
           );
   });
-
+  this.gameServiceService.getComments(this.id).subscribe((res) => {
+      this.comments = res;
+    
+  });
     this.gameServiceService.getQs(id).subscribe(qs => {
             console.log(qs);
             
@@ -116,9 +122,14 @@ export class QCardComponent implements OnInit {
     }
 
 
+    addComment(){
+      this.comments.push({"text":this.user_comment , "authorName" : this.auth.getUser()});
+      this.gameServiceService.addComments(this.id,this.user_comment,this.auth.getUser());
+      this.user_comment = "";
+
+    }
+
 }
-
-
 
 
 @Component({

@@ -15,6 +15,7 @@ import { QCardComponent ,DialogResultExampleDialog1 } from './components/q-card/
 import { CreateGameComponent } from './components/create-game/create-game.component';
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { AuthService } from './services/auth.service';
+import {  PizzaPartyComponent } from './components/game-card/game-card.component';
 
 
 @NgModule({
@@ -23,13 +24,14 @@ import { AuthService } from './services/auth.service';
     myFooter ,
     NavbarComponent,
     DialogResultExampleDialog2,
-    DialogResultExampleDialog1,    
+    DialogResultExampleDialog1,  
     SignUp,
     QCardComponent,
     CreateGameComponent,
     CreateCourseComponent,
+    PizzaPartyComponent
   ],
-  entryComponents: [DialogResultExampleDialog1,DialogResultExampleDialog2] ,
+  entryComponents: [DialogResultExampleDialog1,DialogResultExampleDialog2,PizzaPartyComponent] ,
   imports: [
     BrowserModule,
     FormsModule,

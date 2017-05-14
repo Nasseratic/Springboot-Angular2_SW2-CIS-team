@@ -34,10 +34,10 @@
 
             <span>Back</span>
             <md-icon>arrow_back</md-icon>
-
     </button>
 
     <button (click)="correctingDialog()" md-button style="background-color: #FF5722 ; color:#fff;">
+
 
             <span>Submit &nbsp;</span>
             <md-icon>done</md-icon>
@@ -47,6 +47,30 @@
 
 
   </md-card>
+ 
+      <md-card >
+        <md-card-title>Comments</md-card-title>
+      </md-card>
+      <md-card> 
+          <md-card *ngFor=" let comment of comments"> 
+              <md-card-subtitle>  {{comment.authorName}}</md-card-subtitle>
+
+                <p> 
+                  {{comment.text}}
+                </p>
+          </md-card>
+
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="add comment" [(ngModel)]="user_comment" name="user_comment" >
+            </md-input-container>
+            
+
+              <button (click)="addComment();" md-button style="background-color: #FF5722 ; color:#fff;">
+                      <span>Send &nbsp;</span>
+                      <md-icon>send</md-icon>
+              </button>
+
+      </md-card>  
 
 <button md-fab  *ngIf="editButton()" (click)="this.router.navigate(['/create/game/', edit, id ]);" style="position:fixed; z-index: 999; bottom:20%; right:6%"> <md-icon>border_color</md-icon> </button>
 

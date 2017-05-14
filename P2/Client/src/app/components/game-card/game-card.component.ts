@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
 import { Http } from "@angular/http";
 import { GameServiceService } from "../../services/game-service.service"
+import { CourseServiceService } from "../../services/course-service.service"
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
 import {AuthService} from "../../services/auth.service"
+
 @Component({
   selector: 'game-cards',
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.css'],
-  providers: [GameServiceService]
+  providers: [GameServiceService , CourseServiceService]
 })
 export class GameCardComponent implements OnInit {
 
@@ -16,7 +19,8 @@ export class GameCardComponent implements OnInit {
   games = [];
   id :  any ;
   isMyCourse = false;
-  constructor(private http: Http, private gameServiceService: GameServiceService, private router: Router, private aRouter: ActivatedRoute , public auth:AuthService) {
+  courses =[];
+  constructor(private http: Http, private gameServiceService: GameServiceService, private courseServiceService: CourseServiceService , private router: Router, private aRouter: ActivatedRoute , public auth:AuthService , private snack:MdSnackBar) {
 
     let id = this.aRouter.snapshot.params['id'];
     this.id = id;
@@ -25,6 +29,11 @@ export class GameCardComponent implements OnInit {
       console.log(res);
          this.isMyCourse = res ;
     });
+    this.courseServiceService.getCoursesByTeacher(this.auth.getId()).subscribe(
+      (res) => {
+        this.courses = res;
+      }
+    );
      
   }
 
@@ -84,6 +93,10 @@ export class GameCardComponent implements OnInit {
     this.router.navigate(['/game', id]);
   }
 
+  copyGame(courseId,gameId ) {
+    this.gameServiceService.copyGame(courseId, gameId);
+  }
+  
 
 addButton(){
   if( this.auth.getType() == 'Teacher' && this.isMyCourse === true )
@@ -92,4 +105,17 @@ addButton(){
   return false;
 }
 
+
+openSnackBar() {
+    this.snack.openFromComponent(PizzaPartyComponent, {
+      duration: 1000,
+    });
+  }
+
 }
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  template: ' <p style="color:#fff; font-size:25px;"> game Copied 👍 </p> ',
+})
+export class PizzaPartyComponent {}
